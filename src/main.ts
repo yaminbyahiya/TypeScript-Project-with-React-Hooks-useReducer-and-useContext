@@ -1,66 +1,40 @@
-let stringArr = ["one", "hey", "Dave"];
-let guitars = ["Strat", "Les Paul", 5150];
-let mixedData = ["EVH", 1984, true];
-stringArr[0] = "John";
-stringArr.push("hey");
-guitars[0] = 1984;
-guitars.unshift("Jim");
-guitars = stringArr;
-let test = []
-let bands:string[] = [];
-bands.push("van Halen");
-//Tuples
-let myTuple: [string, number, boolean] = ["Dave", 42, true];
-let mixed = ["John", 1, false];
-myTuple[1] = 42;
-//Objects
-let myObj:object
-myObj = [];
-console.log(typeof myObj);
-myObj = bands;
-myObj = {};
-const exampleObj = {
-    prop1: "Dave",
-    prop2: true
-}
-exampleObj.prop2 = false;
-
+//Type Aliases
+type stringOrNumber = string | number;
+type stringOrNumberArray = (string | number)[];
 type Guitarist = {
     name?: string,
     active: boolean,
-    albums:(String|number)[]
+    albums:stringOrNumberArray
 };
+type UserId = stringOrNumber;
 
-let evh:Guitarist = {
-    name: "Eddie",
-    active: false,
-    albums: [1984, 5150, "OU812"]
+//Literal Types
+let myName: "Dave";
+let userName: "Dave" | "John" | "Amy";
+userName = "Amy";
+
+//functions
+const add = (a:number ,b:number ): number => {
+    return a + b;
 }
-
-let jp:Guitarist = {
-    name: "Jimmy",
-    active: false,
-    albums: ["I", "II", "IV"]
+const logMsg = (message:any) => {
+    console.log(message);
 }
+logMsg("Hello!");
+logMsg(add(2,3));
 
-evh = jp;
-
-const greetGuitarist = (guitarist: Guitarist) => {
-    if(guitarist.name){
-        return `Hello ${guitarist.name.toUpperCase()}!`;
+let subtract = function (c:number, d:number): number {
+    return c-d;
+}
+type mathFunction = (a:number, b:number) => number;
+let multiply:mathFunction = function(c,d){
+    return c*d;
+}
+logMsg(multiply(2,2));
+const allAll = (a:number, b:number, c?:number):number => {
+    if(typeof c !== "undefined"){
+        return a+b+c;
     }else{
-        return "Hello!";
+        return a+b;
     }
 }
-
-console.log(greetGuitarist(jp));
-
-//Enums
-enum Grade{
-    U=1,
-    D,
-    C,
-    B,
-    A
-}
-console.log(Grade.A);
