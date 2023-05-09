@@ -31,10 +31,46 @@ let multiply:mathFunction = function(c,d){
     return c*d;
 }
 logMsg(multiply(2,2));
-const allAll = (a:number, b:number, c?:number):number => {
+const addAll = (a:number, b:number, c?:number):number => {
     if(typeof c !== "undefined"){
         return a+b+c;
     }else{
         return a+b;
+    }
+}
+const sumAll = (a:number=10, b:number, c:number = 2):number => {
+    return a+b+c;
+}
+logMsg(addAll(2,3,2));
+logMsg(addAll(2,3));
+logMsg(sumAll(2,3));
+logMsg(sumAll(undefined,3));
+
+//Rest parameters
+const total = (...nums: number[]): number => {
+    return nums.reduce((prev, curr) => prev + curr);
+};
+logMsg(total(1,2,3,4));
+const createError = (errMsg: string): never => {
+    throw new Error(errMsg);
+};
+const infinite = () => {
+    let i:number = 1;
+    while(true){
+        i++;
+    }
+}
+const isNumber = (value:any):boolean => {
+    return typeof value === "number" ? true : false;
+}
+const numberOrStrings = (value:number|string):string => {
+    if(typeof value === "string"){
+        return "string";
+    }
+    if(isNumber(value)){
+        return "number";
+    }
+    else{
+        return createError("This should not happen");
     }
 }
